@@ -1,0 +1,39 @@
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="15dp">
+
+
+    <ImageView
+        android:id="@+id/iv_searchImage"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/ic_launcher_background"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@drawable/rounded_search_image"
+        android:scaleType="centerCrop"
+        android:clipToOutline="true"/>
+
+    <TextView
+        android:id="@+id/tv_searchTitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="@id/iv_searchImage"
+        app:layout_constraintStart_toEndOf="@id/iv_searchImage"
+        app:layout_constraintEnd_toStartOf="@id/switch1"
+        android:text="example Title"
+        android:layout_margin="15dp"
+        android:textStyle="bold"
+        android:textSize="18sp"/>
+
+    <Switch
+        android:id="@+id/switch1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="@id/iv_searchImage"
+        app:layout_constraintBottom_toBottomOf="@id/iv_searchImage"
+        app:layout_constraintEnd_toEndOf="parent"/>
+</androidx.constraintlayout.widget.ConstraintLayout>
