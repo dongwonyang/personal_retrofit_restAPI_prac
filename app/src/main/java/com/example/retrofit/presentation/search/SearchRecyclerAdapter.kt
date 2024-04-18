@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.copy_challenge.databinding.ItemSearchBinding
+import com.example.retrofit.data.BookMarkData
 import com.example.retrofit.presentation.search.model.ImageDocumentEntity
 
 class SearchRecyclerAdapter(
@@ -37,6 +38,18 @@ class SearchRecyclerAdapter(
                     .into(ivSearchImage)
 
                 tvSearchTitle.text = item.displaySitename
+
+                if(BookMarkData.bookmarkList.contains(item)){
+                    binding.switch1.isChecked = true
+                }
+
+                binding.switch1.setOnCheckedChangeListener { buttonView, isChecked ->
+                    if (isChecked) {
+                        BookMarkData.bookmarkList.add(item)
+                    } else {
+                        BookMarkData.bookmarkList.remove(item)
+                    }
+                }
             }
         }
     }
