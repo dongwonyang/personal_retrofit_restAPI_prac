@@ -1,8 +1,8 @@
 package com.example.retrofit.data.repository
 
 import com.example.retrofit.data.remote.SearchRemoteDatasource
-import com.example.retrofit.presentation.search.model.toEntity
-import com.example.retrofit.presentation.search.repository.SearchRepository
+import com.example.retrofit.domain.search.model.toEntity
+import com.example.retrofit.domain.search.SearchRepository
 
 class SearchRepositoryImpl(
     private val remoteDatasource: SearchRemoteDatasource

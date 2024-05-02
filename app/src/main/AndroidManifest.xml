@@ -15,7 +15,7 @@
         android:theme="@style/Theme.Copy_challenge"
         tools:targetApi="31" >
         <activity
-            android:name="com.example.retrofit.presentation.search.SearchActivity"
+            android:name="com.example.retrofit.presentation.search.main.SearchActivity"
             android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -1,6 +1,6 @@
-package com.example.retrofit.presentation.search.repository
+package com.example.retrofit.domain.search
 
-import com.example.retrofit.presentation.search.model.SearchImageEntity
+import com.example.retrofit.domain.search.model.SearchImageEntity
 
 interface SearchRepository {
     suspend fun getSearchImage(

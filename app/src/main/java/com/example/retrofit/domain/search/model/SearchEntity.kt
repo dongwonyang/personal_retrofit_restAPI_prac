@@ -1,4 +1,4 @@
-package com.example.retrofit.presentation.search.model
+package com.example.retrofit.domain.search.model
 
 import java.util.Date
 
@@ -14,6 +14,7 @@ data class MetaEntity(
 )
 
 data class ImageDocumentEntity(
+    val id: String,
     val collection: String?,
     val thumbnailUrl: String?,
     val imageUrl: String?,
