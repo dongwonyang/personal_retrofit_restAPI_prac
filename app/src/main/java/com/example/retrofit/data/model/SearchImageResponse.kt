@@ -22,5 +22,5 @@ data class ImageDocumentResponse(
     @SerializedName("height") val height: Int?,
     @SerializedName("display_sitename") val displaySitename: String?,
     @SerializedName("doc_url") val docUrl:String?,
-    @SerializedName("datetime") val datetime: Date?
+    @SerializedName("datetime") val datetime: Date
 )

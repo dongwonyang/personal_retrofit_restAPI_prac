@@ -6,8 +6,9 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.CreationExtras
 import com.example.retrofit.data.repository.SearchRepositoryImpl
-import com.example.retrofit.domain.search.SearchGetImageUseCase
+import com.example.retrofit.domain.search.SearchGetUseCase
 import com.example.retrofit.domain.search.model.SearchImageEntity
+import com.example.retrofit.domain.search.model.SearchVideoEntity
 import com.example.retrofit.network.RetrofitClient
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -19,7 +20,7 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 class SearchViewModel(
-    private val searchImage: SearchGetImageUseCase
+    private val searchUseCase: SearchGetUseCase
 ): ViewModel() {
 
     private val _uiState = MutableStateFlow(SearchListUiState.init())
@@ -33,7 +34,8 @@ class SearchViewModel(
         showLoading(true)
         runCatching {
             val items = createItems(
-                images = searchImage(query)
+                images = searchUseCase.imageGet(query),
+                videos = searchUseCase.videoGet(query)
             )
 
             _uiState.update { prevState ->
@@ -65,6 +67,9 @@ class SearchViewModel(
                         is SearchListItem.ImageItem -> item.copy(
                             bookmarked = item.bookmarked.not()
                         )
+                        is SearchListItem.VideoItem -> item.copy(
+                            bookmarked = item.bookmarked.not()
+                        )
                     }
                 }
             )
@@ -82,7 +87,8 @@ class SearchViewModel(
     }
 
     private fun createItems(
-        images: SearchImageEntity
+        images: SearchImageEntity,
+        videos: SearchVideoEntity
     ): List<SearchListItem>{
 
         fun createImageItems(
@@ -92,12 +98,26 @@ class SearchViewModel(
                 id = document.id,
                 title = document.displaySitename,
                 thumbnail = document.thumbnailUrl,
-                date = document.datetime
+                date = document.datetime,
+                url = document.docUrl
+            )
+        }.orEmpty()
+
+        fun createVideoItems(
+            videos: SearchVideoEntity
+        ): List<SearchListItem.VideoItem> = videos.documents?.map{document ->
+            SearchListItem.VideoItem(
+                id = document.id,
+                title = document.author,
+                thumbnail = document.thumbnail,
+                date = document.datetime,
+                url = document.url
             )
         }.orEmpty()
 
         return arrayListOf<SearchListItem>().apply{
             addAll(createImageItems(images))
+            addAll(createVideoItems(videos))
         }.sortedByDescending {
             it.date
         }
@@ -113,6 +133,6 @@ class SearchViewModelFactory: ViewModelProvider.Factory{
         modelClass: Class<T>,
         extras: CreationExtras
     ): T = SearchViewModel(
-        SearchGetImageUseCase(repository)
+        SearchGetUseCase(repository)
     ) as T
 }

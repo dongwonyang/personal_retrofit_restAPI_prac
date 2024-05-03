@@ -6,7 +6,7 @@ import com.example.retrofit.domain.search.SearchRepository
 
 class SearchRepositoryImpl(
     private val remoteDatasource: SearchRemoteDatasource
-): SearchRepository {
+) : SearchRepository {
     override suspend fun getSearchImage(
         query: String,
         sort: String,
@@ -19,4 +19,15 @@ class SearchRepositoryImpl(
         size
     ).toEntity()
 
+    override suspend fun getSearchVideo(
+        query: String,
+        sort: String,
+        page: Int,
+        size: Int
+    ) =remoteDatasource.getSearchVideo(
+        query,
+        sort,
+        page,
+        size
+    ).toEntity()
 }
