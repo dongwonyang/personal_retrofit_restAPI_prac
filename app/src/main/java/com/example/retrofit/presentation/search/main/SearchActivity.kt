@@ -6,8 +6,10 @@ import androidx.fragment.app.Fragment
 import com.example.copy_challenge.R
 import com.example.copy_challenge.databinding.ActivitySearchBinding
 import com.google.android.material.tabs.TabLayoutMediator
+import dagger.hilt.android.AndroidEntryPoint
 
 
+@AndroidEntryPoint
 class SearchActivity : AppCompatActivity() {
     private val binding: ActivitySearchBinding by lazy {
         ActivitySearchBinding.inflate(layoutInflater)

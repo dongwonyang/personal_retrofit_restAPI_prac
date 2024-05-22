@@ -6,7 +6,6 @@ import java.util.Date
 data class SearchVideoResponse (
     @SerializedName("meta") val meta: MetaResponse,
     @SerializedName("documents") val documents: List<VideoDocumentResponse>
-
 )
 
 data class VideoDocumentResponse(

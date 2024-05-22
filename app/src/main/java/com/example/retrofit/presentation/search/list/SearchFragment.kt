@@ -13,17 +13,17 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.copy_challenge.databinding.FragmentSearchBinding
 import com.example.retrofit.presentation.search.shared.SearchSharedViewModel
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 
+@AndroidEntryPoint
 class SearchFragment : Fragment() {
     private var _binding: FragmentSearchBinding? = null
     private val binding get() = _binding ?: error("Binding is not initialized")
 
-    private val viewModel: SearchViewModel by viewModels{
-        SearchViewModelFactory()
-    }
+    private val viewModel: SearchViewModel by viewModels()
     private val adapter: SearchListAdapter by lazy{
         SearchListAdapter(
             onClick = {

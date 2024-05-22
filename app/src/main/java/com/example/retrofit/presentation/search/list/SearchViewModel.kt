@@ -10,6 +10,7 @@ import com.example.retrofit.domain.search.SearchGetUseCase
 import com.example.retrofit.domain.search.model.SearchImageEntity
 import com.example.retrofit.domain.search.model.SearchVideoEntity
 import com.example.retrofit.network.RetrofitClient
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharedFlow
@@ -18,8 +19,10 @@ import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class SearchViewModel(
+@HiltViewModel
+class SearchViewModel @Inject constructor(
     private val searchUseCase: SearchGetUseCase
 ): ViewModel() {
 
@@ -124,15 +127,4 @@ class SearchViewModel(
     }
 
 
-}
-
-class SearchViewModelFactory: ViewModelProvider.Factory{
-    private val repository = SearchRepositoryImpl(RetrofitClient.search)
-
-    override fun <T : ViewModel> create(
-        modelClass: Class<T>,
-        extras: CreationExtras
-    ): T = SearchViewModel(
-        SearchGetUseCase(repository)
-    ) as T
 }

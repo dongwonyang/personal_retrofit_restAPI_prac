@@ -2,8 +2,11 @@ package com.example.retrofit.domain.search
 
 import com.example.retrofit.domain.search.model.SearchImageEntity
 import com.example.retrofit.domain.search.model.SearchVideoEntity
+import dagger.hilt.android.scopes.ViewModelScoped
+import javax.inject.Inject
 
-class SearchGetUseCase(
+@ViewModelScoped
+class SearchGetUseCase @Inject constructor(
     private val repository: SearchRepository
 ) {
     suspend fun imageGet(
